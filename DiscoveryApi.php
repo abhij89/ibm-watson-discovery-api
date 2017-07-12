@@ -45,7 +45,7 @@ class DiscoveryApi {
 		$params['version'] = $this->version;
 		$params['query'] = urlencode($query);
 		$params['offset'] = $offset;
-		$params['sort'] = $sort;
+		$params['sort'] = $sortby;
 		$params['count'] = $size;
 		$params['return'] = urlencode("author,alchemyapi_text,host,language,text,url,title,score,publicationDate.date");
 		$params['filter'] = urlencode("blekko.hostrank>10,blekko.chrondate>$ts,blekko.chrondate<$now"); // This filters hosts with rank less than 10 and content published between $ts and $now
@@ -92,7 +92,6 @@ class DiscoveryApi {
 		$cacheFile = '../cache' . DIRECTORY_SEPARATOR . md5($file);
 		if (file_exists($cacheFile)) {
 			$fh = fopen($cacheFile, 'r') or die("Unable to open file!");
-			;
 			$timeElapsed = time() - filemtime($cacheFile);
 			// if data was cached recently, return cached data
 			if ($timeElapsed < 86400) {
